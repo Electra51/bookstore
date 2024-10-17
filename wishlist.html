@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wishlist</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- Navbar Section -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-detail">
+          <a href="/index.html" aria-label="Go to Home Page">
+            <img src="assets/logo.png" alt="Logo" width="100" />
+          </a>
+
+          <div>
+            <button
+              class="menu-icon"
+              onclick="toggleMenu()"
+              aria-label="Toggle navigation menu">
+              <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+              <li><a href="/index.html" id="homeLink">Home</a></li>
+              <li><a href="/wishlist.html" id="wishlistLink">Wishlist</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- wishlist section -->
+    <main class="container">
+      <h2 class="title">Your Wishlist <span id="wishlist-count">(0)</span></h2>
+      <div id="loader" class="loader" style="display: none">
+        <img src="assets/Loading_2.gif" alt="Loading..." />
+      </div>
+      <div id="wishlist-books" class="book-zone"></div>
+    </main>
+
+    <script src="wishlist.js" defer></script>
+  </body>
+</html>

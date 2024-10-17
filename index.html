@@ -5,48 +5,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Listing</title>
     <link rel="stylesheet" href="styles.css" />
-    <!-- Add in your HTML head -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   </head>
   <body>
-    <!-- <nav>
-      <div>
-        <img src="assets/logo.png" width="100" />
-      </div>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="wishlist.html">Wishlist</a></li>
-      </ul>
-    </nav> -->
+    <!-- Navbar Section -->
     <nav class="navbar">
-      <div class="navbar-brand">
-        <img src="assets/logo.png" width="100" />
-      </div>
-      <div>
-        <button class="menu-icon" onclick="toggleMenu()">
-          <i class="fas fa-bars"></i>
-        </button>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="wishlist.html">Wishlist</a></li>
-        </ul>
+      <div class="container">
+        <div class="navbar-detail">
+          <img src="assets/logo.png" alt="Logo" width="100" />
+          <div>
+            <button class="menu-icon" onclick="toggleMenu()">
+              <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links active" id="navLinks">
+              <li><a href="/index.html">Home</a></li>
+              <li>
+                <a href="/wishlist.html"
+                  >Wishlist <span id="wishlist-count">(0)</span></a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
-    <div class="container">
-      <input type="text" id="search-bar" placeholder="Search by title..." />
-      <select id="genre-filter">
-        <option value="">Select Genre</option>
-        <!-- Dynamically load genres here -->
-      </select>
-      <div id="book-list"></div>
-      <div id="pagination">
-        <button id="prev-page">Previous</button>
-        <span id="page-info">Page 1</span>
-        <button id="next-page">Next</button>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="new-hero">
+          <div class="hero-text">
+            <h2>Find Yourself in a Great Book</h2>
+            <p>
+              A room without books is like a body without a soul. Explore our
+              collection and find your next favorite read.
+            </p>
+            <button>Read More</button>
+          </div>
+          <div class="hero-image">
+            <img src="assets/heroBanner.png" alt="Book Cover" />
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="container">
+        <div class="features-container">
+          <div class="feature-item">
+            <div class="icon-text">
+              <i class="fas fa-shopping-cart feature-icon"></i>
+              <h3>Online Shopping</h3>
+            </div>
+            <p>Shop from home.</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon-text">
+              <i class="fas fa-headset feature-icon"></i>
+              <h3>24/7 Support</h3>
+            </div>
+            <p>Always available.</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon-text">
+              <i class="fas fa-undo feature-icon"></i>
+              <h3>Easy Returns</h3>
+            </div>
+            <p>10-day return policy.</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon-text">
+              <i class="fas fa-truck feature-icon"></i>
+              <h3>Free Delivery</h3>
+            </div>
+            <p>Delivery at no extra cost.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Books Collection Section -->
+    <section class="container">
+      <h2 class="books-home-section">Books List</h2>
+      <div class="search-section">
+        <input type="text" id="search-bar" placeholder="Search by title..." />
+        <select id="genre-filter">
+          <option value="">Select Genre</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Drama">Drama</option>
+          <option value="Poetry">Poetry</option>
+          <option value="Adventure">Adventure</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Science">Science</option>
+          <option value="Biography">Biography</option>
+        </select>
+      </div>
+      <div id="loader" class="loader" style="display: none">
+        <img src="assets/Loading_2.gif" alt="Loading..." />
+      </div>
+      <div id="book-list" class="book-zone"></div>
+      <div id="pagination" class="btns">
+        <button id="prev-page" class="n" disabled>Previous</button>
+        <span id="page-info">Page 1</span>
+        <button id="next-page" class="n">Next</button>
+      </div>
+    </section>
+
+    <!-- Offer Section -->
+    <section class="offer-section">
+      <img src="assets/book1.png" alt="Book Offer" width="300" />
+
+      <div>
+        <p class="offer-title">
+          Books <span>50% Off</span> Now! Don't miss this great deal!
+        </p>
+        <div class="btns">
+          <button>Purchase Now</button>
+          <button class="n">Read More</button>
+        </div>
+      </div>
+
+      <img src="assets/book2.png" alt="Book Offer" width="300" class="h" />
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section about">
+            <img src="assets/logos.png" alt="Footer Logo" />
+            <p>
+              We offer a wide range of books to fuel your reading passion.
+              Discover your next great read with us.
+            </p>
+          </div>
+          <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Books</a></li>
+              <li><a href="#">Wishlist</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p>Email: info@example.com</p>
+            <p>Phone: +123 456 7890</p>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 BookStore. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
