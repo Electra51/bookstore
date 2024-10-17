@@ -7,7 +7,6 @@ function toggleMenu() {
 }
 
 async function fetchBookDetails(bookId) {
-  // Show loader before fetching book details
   loaderElement.style.display = "block";
 
   try {
@@ -22,7 +21,6 @@ async function fetchBookDetails(bookId) {
   } catch (error) {
     console.error("Error fetching book details:", error);
   } finally {
-    // Hide loader after fetching book details or on error
     loaderElement.style.display = "none";
   }
 }
@@ -95,5 +93,5 @@ document.addEventListener("DOMContentLoaded", () => {
   if (bookId) {
     fetchBookDetails(bookId);
   }
-  updateWishlistCount(); // Update wishlist count on page load
+  updateWishlistCount();
 });

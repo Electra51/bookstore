@@ -1,5 +1,4 @@
 let currentPage = 1;
-const booksPerPage = 10;
 const bookListElement = document.getElementById("book-list");
 const searchBar = document.getElementById("search-bar");
 const genreFilter = document.getElementById("genre-filter");
@@ -25,11 +24,12 @@ function toggleMenu() {
 async function fetchBooks(page = 1, searchTerm = "", genre = "") {
   const loader = document.getElementById("loader");
   loader.style.display = "block";
+  bookListElement.style.display = "none";
 
   try {
     const response = await fetch(`https://gutendex.com/books?page=${page}`);
     const data = await response.json();
-
+    console.log("data", data?.results?.length);
     let filteredBooks = data.results.filter(
       (book) =>
         book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -45,6 +45,7 @@ async function fetchBooks(page = 1, searchTerm = "", genre = "") {
     console.error("Error fetching books:", error);
   } finally {
     loader.style.display = "none";
+    bookListElement.style.display = "grid";
   }
 }
 
@@ -126,7 +127,7 @@ function truncateText(text, maxLength) {
   return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
 }
 
-// Format book genres
+// Book genres
 function formatGenres(subjects) {
   const commonGenres = [
     "Fiction",
@@ -165,7 +166,7 @@ function toggleWishlist(bookId, heartIcon) {
   wishlist.push(bookId);
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
-  // Change the icon to a solid heart
+  // Change icon
   heartIcon.classList.remove("fa-regular");
   heartIcon.classList.add("fa-solid");
 
@@ -173,7 +174,7 @@ function toggleWishlist(bookId, heartIcon) {
   updateWishlistCount();
 }
 
-// Add event listener to the wishlist buttons
+// Add the wishlist buttons
 document.addEventListener("click", (event) => {
   if (event.target.closest(".wishlist-btn")) {
     const button = event.target.closest(".wishlist-btn");
@@ -208,28 +209,21 @@ function updateWishlistCount() {
 function updateButtonState() {
   const prevButton = document.getElementById("prev-page");
   const nextButton = document.getElementById("next-page");
-
-  // Disable the previous button if on the first page
   prevButton.disabled = currentPage === 1;
-
-  // Here you can also manage the next button's disabled state
-  // For example, if there's no more data to load, you might disable it
-  // Assuming you know the total number of pages or books
-  // nextButton.disabled = /* condition to disable next button */;
 }
 
-// Update the event listeners for the pagination buttons
+// Update the pagination buttons
 document.getElementById("next-page")?.addEventListener("click", () => {
   const loader = document.getElementById("loader");
   const nextButton = document.getElementById("next-page");
 
-  loader.style.display = "block"; // Show loader when "Next" is clicked
-  nextButton.textContent = "Loading..."; // Change button text to loading
+  loader.style.display = "block";
+  nextButton.textContent = "Loading...";
 
   currentPage++;
   fetchBooks(currentPage, searchBar.value, genreFilter.value).then(() => {
-    nextButton.textContent = "Next"; // Restore button text once loading is done
-    updateButtonState(); // Update button states
+    nextButton.textContent = "Next";
+    updateButtonState();
   });
 });
 
@@ -237,27 +231,25 @@ document.getElementById("prev-page")?.addEventListener("click", () => {
   const loader = document.getElementById("loader");
   const prevButton = document.getElementById("prev-page");
 
-  loader.style.display = "block"; // Show loader when "prev" is clicked
-  prevButton.textContent = "Loading..."; // Change button text to loading
+  loader.style.display = "block";
+  prevButton.textContent = "Loading...";
 
   if (currentPage > 1) {
     currentPage--;
     fetchBooks(currentPage, searchBar.value, genreFilter.value).then(() => {
       prevButton.textContent = "Previous";
-      updateButtonState(); // Update button states
+      updateButtonState();
     });
   }
 });
 
-// Initialize page actions
+// Initialize page
 function initPage() {
   setActiveLink();
   updateWishlistCount();
-  loadPreferences(); // Load saved preferences on page load
+  loadPreferences();
   fetchBooks(currentPage);
-
-  updateButtonState(); // Call to initialize button states
+  updateButtonState();
 }
 
-// Call initPage to initialize
 initPage();

@@ -70,7 +70,6 @@ async function fetchWishlistBooks() {
   } catch (error) {
     console.error("Error fetching wishlist books:", error);
   } finally {
-    // Hide loader after fetching is complete or on error
     loaderElement.style.display = "none";
     wishlistBooksElement.style.display = "grid";
   }
@@ -85,7 +84,7 @@ function updateWishlistCount() {
 
 // Display the books on the wishlist page
 function displayWishlistBooks(books) {
-  wishlistBooksElement.innerHTML = ""; // Clear existing content
+  wishlistBooksElement.innerHTML = "";
   books.forEach((book) => {
     const bookElement = document.createElement("div");
     bookElement.classList.add("book-item");
@@ -121,16 +120,14 @@ function removeFromWishlist(bookId) {
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   wishlist = wishlist.filter((id) => id !== bookId);
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  updateWishlistCount(); // Update count when an item is removed
-  fetchWishlistBooks(); // Refresh the wishlist display
+  updateWishlistCount();
+  fetchWishlistBooks();
 }
 
-// Redirect to the book details page
 function viewDetails(bookId) {
   window.location.href = `book-details.html?id=${bookId}`;
 }
 
-// Initialize the page by setting active nav link and fetching wishlist books
 document.addEventListener("DOMContentLoaded", () => {
   setActiveNavLink();
   if (window.location.pathname.includes("wishlist.html")) {
