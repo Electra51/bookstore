@@ -24,7 +24,7 @@ function toggleMenu() {
 
 async function fetchBooks(page = 1, searchTerm = "", genre = "") {
   const loader = document.getElementById("loader");
-  loader.style.display = "block"; // Show the loader before fetching the data
+  loader.style.display = "block";
 
   try {
     const response = await fetch(`https://gutendex.com/books?page=${page}`);
@@ -44,7 +44,7 @@ async function fetchBooks(page = 1, searchTerm = "", genre = "") {
   } catch (error) {
     console.error("Error fetching books:", error);
   } finally {
-    loader.style.display = "none"; // Hide the loader once the data is fetched
+    loader.style.display = "none";
   }
 }
 
@@ -68,19 +68,19 @@ function loadPreferences() {
   }
 }
 
-// Update the event listeners for the search bar and genre filter
+// Update the search bar and genre filter
 searchBar.addEventListener("input", () => {
   currentPage = 1;
-  savePreferences(); // Save preferences whenever input changes
+  savePreferences();
   fetchBooks(currentPage, searchBar.value, genreFilter.value);
-  updateButtonState(); // Update button states after fetching
+  updateButtonState();
 });
 
 genreFilter.addEventListener("change", () => {
   currentPage = 1;
-  savePreferences(); // Save preferences whenever the genre changes
+  savePreferences();
   fetchBooks(currentPage, searchBar.value, genreFilter.value);
-  updateButtonState(); // Update button states after fetching
+  updateButtonState();
 });
 
 // Display book list
